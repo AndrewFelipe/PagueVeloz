@@ -27,6 +27,7 @@
                                         <col width="100">
                                         <col width="150">
                                         <col width="250" class="a-center">
+                                        <col width="100" class="a-center">
                                     </colgroup>
                                     <thead>
                                         <tr class="headings">
@@ -42,6 +43,9 @@
                                             <th>
                                                 <span class="nobr"><span class="sort-title">Valor Total Pacote</span></span>
                                             </th>
+                                            <th>
+                                                <span class="nobr"><span class="sort-title"></span></span>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody id="sms_gerar_container">
@@ -52,7 +56,18 @@
                                                 <td><?php echo $pacote->Nome ?></td>
                                                 <td><?php echo $pacote->QuantidadeDeCreditos ?> SMS</td>
                                                 <td class='a-center'><?php echo Mage::helper('core')->currency($pacote->ValorDoCredito, true, false) ?> por SMS</td>
-                                                <td class='a-center'><?php echo $pacote->QuantidadeDeCreditos ?> SMS por <?php echo Mage::helper('core')->currency($pacote->ValorDoPacote, true, false) ?></td>
+                                                <td class='a-center'>
+                                                    <?php echo $pacote->QuantidadeDeCreditos ?> SMS por <?php echo Mage::helper('core')->currency($pacote->ValorDoPacote, true, false) ?>
+                                                </td>
+                                                <td class='a-center'>
+                                                    <button id="" title="Comprar" type="button" class="scalable add" onclick="smsComprar.comprarPacote(
+                                                                    0,
+                                                                    0,
+                                                                    <?php echo $pacote->QuantidadeDeCreditos ?>
+                                                                )" style="">
+                                                        <span><span><span>Comprar</span></span></span>
+                                                    </button>
+                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -64,18 +79,18 @@
                 endif;
                 ?>
             </div>
+            <div id="boleto_compra_sms"></div>
             <div class="content-header">
                 <table cellspacing="0">
                     <tbody>
                         <tr>
                             <td style="width:50%;">
-                                <h3 class="">Compra de créditos</h3>
+                                <h3 class="">Compra de créditos Avulso</h3>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div id="boleto_compra_sms"></div>
             <div id="productGrid">
                 <div class="grid">
                     <div class="hor-scroll">
@@ -119,7 +134,7 @@
                                         <input id="buy_sms_value" name="buy_sms_value" />
                                     </td>
                                     <td class='a-center'>
-                                        <button id="" title="Comprar" type="button" class="scalable add" onclick="smsComprar.comprar(
+                                        <button id="" title="Comprar" type="button" class="scalable add" onclick="smsComprar.comprarAvulso(
                                                         $('payment_type').value,
                                                         $('buy_type').value,
                                                         $('buy_sms_value').value
@@ -133,6 +148,7 @@
                     </div>
                 </div>
             </div>
+            <div id="boleto_compra_sms_avulso"></div>
         </div>
         <div style="position: unset; width: 49%;">
             <div class="content-header">

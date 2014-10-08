@@ -44,35 +44,25 @@ class PagueVeloz_Boleto_Model_Boleto extends Mage_Core_Model_Abstract
 
         $_order = Mage::getModel('sales/order')->load($this->getOrderId());
         try {
-            $dataDateTime = new DateTime($this->getDataVencimento());
+            $_boletosData = $boletoMethod->getBoletoPago($_order->getIncrementId());
+            if ($_boletosData) {
+                foreach ($_boletosData as $_boleto) {
 
-            for ($i = 0; $i <= $_diasVencimento; $i++) {
-                if ($i !== 0) // NAO ALTERA A DATA NA PRIMEIRA DATA
-                    $dataDateTime->modify("-1 day");
+                    if (($_boleto->SeuNumero == $_order->getIncrementId()) && $_boleto->TemPagamento) {
+                        $_order->setStatus($boletoMethod->getOrderStatus())
+                            ->setState($boletoMethod->getOrderStatus())
+                            ->addStatusHistoryComment("BOLETO PAGO EM: {$_boleto->DataPagamento} | {$_boleto->ValorPago} R$")
+                            ->save();
 
-                $data = $dataDateTime->format('Y-m-d'); // FORMAT LIKE > '2013-11-23'
-                $_boletosData = $boletoMethod->getBoletoPago($data);
+                        $this->setStatus('pago')
+                            ->setValorPago($_boleto->ValorPago)
+                            ->setUpdatedTime(Mage::getSingleton('core/date')->gmtDate())
+                            ->save();
 
-                if ($_boletosData) {
-                    foreach ($_boletosData as $_boleto) {
-                        if ($_boleto->SeuNumero == $_order->getIncrementId()) {
-                            foreach ($_boleto->Pagamentos as $_pagamento) {
-                                $_order->setStatus($boletoMethod->getOrderStatus())
-                                    ->setState($boletoMethod->getOrderStatus())
-                                    ->addStatusHistoryComment("BOLETO PAGO EM: {$_pagamento->DataProcessamento} | {$_pagamento->Valor} R$")
-                                    ->save();
+                        $_boleto->Status = 'pago';
 
-                                $this->setStatus('pago')
-                                    ->setValorPago($_pagamento->Valor)
-                                    ->setUpdatedTime(Mage::getSingleton('core/date')->gmtDate())
-                                    ->save();
-
-                                $_pagamento->Status = 'pago';
-
-                                $boletoMethod->log("[{$_order->getIncrementId()}] Boleto Pago | ID: " . $_boleto->Id . " | URL: " . $_boleto->Url);
-                                return $_pagamento;
-                            }
-                        }
+                        $boletoMethod->log("[{$_order->getIncrementId()}] Boleto Pago | ID: " . $_boleto->Id . " | URL: " . $_boleto->Url);
+                        return $_boleto;
                     }
                 }
             }
@@ -90,7 +80,6 @@ class PagueVeloz_Boleto_Model_Boleto extends Mage_Core_Model_Abstract
         $cpf = $customer->getTaxvat();
         $email = $customer->getEmail();
         $boleto = $this->loadByOrderId($order->getId());
-        
         if (!$boleto->getId()) {
             $webservice = Mage::getModel('pagueveloz_api/webservice');
             $url = $webservice->generateBoletoUrl($valor, $seuNumero, $nome, $cpf, $email);

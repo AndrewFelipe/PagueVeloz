@@ -20,7 +20,7 @@ class PagueVeloz_Api_Model_Webservice_Boleto extends PagueVeloz_Api_Model_Webser
         $contexto->setMethod('get');
         $contexto->addHeader($this->_default_header);
         $contexto->setAuthorization($this->getAuthDto()->getEmail(), $this->getAuthDto()->getToken());
-        $contexto->setHost($this->getHost() . '?data=' . $dto->getData());
+        $contexto->setHost($this->getHost() . '?SeuNumero=' . $dto->getSeuNumero());
 
         return $this->getMachine()->Send($contexto);
     }
@@ -32,7 +32,6 @@ class PagueVeloz_Api_Model_Webservice_Boleto extends PagueVeloz_Api_Model_Webser
         $contexto->addHeader($this->_default_header);
         $contexto->setAuthorization($this->getAuthDto()->getEmail(), $this->getAuthDto()->getToken());
         $contexto->setHost($this->getHost());
-
         $json = array(
             "Pdf"   => $dto->getPdf(),
             "Vencimento" => $dto->getVencimento(),
@@ -54,7 +53,6 @@ class PagueVeloz_Api_Model_Webservice_Boleto extends PagueVeloz_Api_Model_Webser
         $json = json_encode($json);
 
         $contexto->setBody($json);
-
         return $this->getMachine()->Send($contexto);
     }
 

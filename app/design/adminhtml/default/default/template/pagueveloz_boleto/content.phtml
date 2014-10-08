@@ -19,58 +19,48 @@
             </div>
             <div id="group_fields7" class="fieldset fieldset-wide">
                 <div class="hor-scroll">
-                    <table cellspacing="0" class="form-list">
-                        <tbody>
-                            <tr>
-                                <td class="label"><label for="name">Titulo <span class="required">*</span></label></td>
-                                <td class="value">
-                                    <input type="text" class=" required-entry input-text required-entry" value="" name="conta[titulo]" id="titulo">
-                                </td>
-                                <td class="scope-label"><span class="nobr"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="label"><label for="name">Nome título <span class="required">*</span></label></td>
-                                <td class="value">
-                                    <input type="text" class=" required-entry input-text required-entry" value="" name="conta[nome_titulo]" id="nome_titulo">
-                                </td>
-                                <td class="scope-label"><span class="nobr"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="label"><label for="name">Vencimento </label></td>
-                                <td class="value">
-                                    <input type="text" class=" required-entry input-text required-entry" value="" name="conta[vencimento]" id="vencimento">
-                                </td>
-                                <td class="scope-label"><span class="nobr"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="label"><label for="name">Valor </label></td>
-                                <td class="value">
-                                    <input type="text" class=" required-entry input-text required-entry" value="" name="conta[valor]" id="valor">
-                                </td>
-                                <td class="scope-label"><span class="nobr"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="label"><label for="name">Código de Barras </label></td>
-                                <td class="value">
-                                    <input type="text" class=" required-entry input-text required-entry" value="" name="conta[codigo_de_barras]" id="codigo_de_barras">
-                                </td>
-                                <td class="scope-label"><span class="nobr"></span></td>
-                            </tr>
-                            <tr>
-                                <td style="" class="a-right">
-                                    <button style="" onclick="conta.cadastrar(
-                                        $('titulo').value,
-                                        $('nome_titulo').value,
-                                        $('vencimento').value,
-                                        $('valor').value,
-                                        $('codigo_de_barras').value
-                                    )" class="scalable add" type="button" title="Cadastrar Conta" id="id_testes">
-                                        <span><span><span>Cadastrar Conta</span></span></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <form action="<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/conta/cadastrar') ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+                        <table cellspacing="0" class="form-list">
+                            <tbody>
+                                <tr>
+                                    <td class="label"><label for="name">Boleto <span class="required">*</span></label></td>
+                                    <td class="value">
+                                        <input type="file" class="required-entry input-text required-entry" name="titulo_arquivo" id="titulo_arquivo">
+                                    </td>
+                                    <td class="scope-label"><span class="nobr"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="label"><label for="name">Vencimento </label></td>
+                                    <td class="value">
+                                        <input style="width:110px !important;" type="text" class="required-entry input-text required-entry" value="" name="vencimento" id="vencimento"><img id="vencimento_button" class="arrow" alt="Go to Previous page" src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>">
+                                    </td>
+                                    <td class="scope-label"><span class="nobr"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="label"><label for="name">Valor </label></td>
+                                    <td class="value">
+                                        <input  style="width:110px !important;" type="text" class=" required-entry input-text required-entry" value="" name="valor" id="valor">
+                                    </td>
+                                    <td class="scope-label"><span class="nobr"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="label"><label for="name">Código de Barras </label></td>
+                                    <td class="value">
+                                        <input type="text" class=" required-entry input-text required-entry" value="" name="codigo_de_barras" id="codigo_de_barras">
+                                    </td>
+                                    <td class="scope-label"><span class="nobr"></span></td>
+                                </tr>
+                                <tr>
+                                    <td style="" class="a-right">
+                                        <button style="" class="scalable add" type="submit" title="Cadastrar Conta" id="id_testes">
+                                            <span><span><span>Cadastrar Conta</span></span></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>

@@ -49,12 +49,12 @@ class PagueVeloz_Boleto_Model_BoletoMethod extends Mage_Payment_Model_Method_Ban
         return $this->webservice;
     }
 
-    public function getBoletoPago($date)
+    public function getBoletoPago($seuNumero)
     {
         $boleto = new PagueVeloz_Api_Model_Webservice_Boleto(Mage::getModel('pagueveloz_api/dto_emailDTO', $this->getEmail()), $this->getToken());
 
         $dto = Mage::getModel('pagueveloz_api/dto_boletoDTO');
-        $dto->setData($date);
+        $dto->setSeuNumero($seuNumero);
         $resposta_final = $boleto->Get($dto);
 
         return json_decode($resposta_final->getBody());

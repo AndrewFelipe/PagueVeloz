@@ -75,6 +75,14 @@
         div_boleto: 'boleto_compra_sms',
         totalSelected: 0,
         produtosAdded: {},
+        comprarPacote: function(payment_type, buy_type, value) {
+            smsComprar.div_boleto = 'boleto_compra_sms';
+            smsComprar.comprar(payment_type, buy_type, value);
+        },
+        comprarAvulso: function(payment_type, buy_type, value) {
+            smsComprar.div_boleto = 'boleto_compra_sms_avulso';
+            smsComprar.comprar(payment_type, buy_type, value);
+        },
         comprar: function(payment_type, buy_type, value) {
             new Ajax.Request('<?php echo Mage::getUrl('adminhtml/sms/comprar') ?>', {
                 method: 'post',
@@ -85,7 +93,7 @@
                 },
                 onSuccess: function(response) {
                     var dados = response.responseText.evalJSON();
-                    $(smsComprar.div_boleto).innerHTML = 'Imprimir boleto: <a target="_blank" href="' + dados.urlBoleto + '">clique aqui</a>';
+                    $(smsComprar.div_boleto).innerHTML = '<div style="margin: 10px;">Imprimir boleto: <a style="background-color: #fb913e; border: 1px solid #ee5f02; color: white; font-weight: bold; padding: 5px;  text-decoration: none;" target="_blank" href="' + dados.urlBoleto + '">clique aqui</a></div>';
                 },
                 onFailure: function() {
                     alert('Não foi possível completar a operação, tente novamente...');

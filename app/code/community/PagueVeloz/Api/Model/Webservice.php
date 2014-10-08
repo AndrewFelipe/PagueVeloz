@@ -7,8 +7,8 @@
 class PagueVeloz_Api_Model_Webservice extends Mage_Core_Model_Abstract
 {
 
-    const PAGUEVELOZ_URL_STAGING = 'http://pagueveloz.homolog.bludata.net/';
-    const PAGUEVELOZ_URL_PRODUCTION = 'https://api.pagueveloz.com.br/';
+    const PAGUEVELOZ_URL_STAGING = 'http://sandbox.pagueveloz.com.br/';
+    const PAGUEVELOZ_URL_PRODUCTION = 'https://www.pagueveloz.com.br/';
 
     public function getPaguevelozEmail()
     {

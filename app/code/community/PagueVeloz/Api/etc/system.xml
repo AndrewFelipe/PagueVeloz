@@ -26,14 +26,34 @@
                         <![CDATA[
                             <div class="config-heading">
                                 <strong style="font-size:14px">Informações Importantes</strong><br /><br />
-                                Para solicitar seu token de produção faça o cadastro em 
-                                <a href="https://www.pagueveloz.com.br/Cliente" target="_blank">PagueVeloz</a>.<br /><br />
-                                Para solicitar seu token para testes, em homologação, faça o cadastro em 
-                                <a href="http://pagueveloz.homolog.bludata.net/Cliente" target="_blank">PagueVeloz Homolog</a>.<br />
+                                <div>
+                                    <button style="height: 50px; margin-left: 50px;" onclick="pagueveloz.cadastrar()" class="scalable save" type="button" title="Salvar Configuração" id="id_78fc26f7eeebbd0b527349a17a37de66">
+                                        <span><span><span>Assinar PagueVeloz</span></span></span>
+                                    </button>
+                                </div>
+                                <div style="color: #fc862e;
+                                            font-size: xx-large;
+                                            font-weight: bold;
+                                            margin-bottom: 25px;
+                                            margin-left: 100px;
+                                            margin-top: 25px;">OU</div>
+                                Para criar seu token de produção faça o cadastro em 
+                                <a href="https://www.pagueveloz.com.br/Cliente" target="_blank">PagueVeloz</a>.<br />
+                                Para criar seu token para testes, em homologação, faça o cadastro em 
+                                <a href="http://pagueveloz.homolog.bludata.net/Cliente" target="_blank">PagueVeloz Homolog</a>.
+                                
                             </div>
                         ]]>
                     </comment>
                     <fields>
+                        <id translate="label">
+                            <label>Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </id>
                         <active translate="label">
                             <label>Habilitado</label>
                             <frontend_type>select</frontend_type>

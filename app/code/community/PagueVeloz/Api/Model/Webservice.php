@@ -169,4 +169,29 @@ class PagueVeloz_Api_Model_Webservice extends Mage_Core_Model_Abstract
         return $url;
     }
 
+    public function assinar($nome, $doc, $tipoPessoa, $email, $login, $estado, $cidade, $rua, $cep, $numero)
+    {
+        $assinar = new PagueVeloz_Api_Model_Webservice_Assinar();
+        $dto = new PagueVeloz_Api_Model_Dto_AssinarDTO(); //Mage::getModel('pagueveloz_api/dto_assinarDTO');
+
+        $dto->setEmail($email);
+        $dto->setNome($nome);
+        $dto->setDocumento($doc);
+        $dto->setTipoPessoa($tipoPessoa);
+        $dto->setLoginUsuarioDefault($login);
+        $dto->setEstado($estado);
+        $dto->setCidade($cidade);
+        $dto->setRua($rua);
+        $dto->setCep($cep);
+        $dto->setNumero($numero);
+
+        $resposta_final = $assinar->Post($dto);
+        $result = $resposta_final->getBody();
+        if (stripos($result, 'Erro') !== false) {
+            $url = "";
+        }
+
+        return json_decode($result);
+    }
+
 }

@@ -8,6 +8,61 @@ class PagueVeloz_Api_Model_Dto_AssinarDTO
     private $_tipoPessoa = '';
     private $_email = '';
     private $_loginUsuarioDefault = '';
+    private $estado = '';
+    private $cidade = '';
+    private $rua = '';
+    private $cep = '';
+    private $numero = '';
+
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    public function getCidade()
+    {
+        return $this->cidade;
+    }
+
+    public function getRua()
+    {
+        return $this->rua;
+    }
+
+    public function getCep()
+    {
+        return $this->cep;
+    }
+
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+    }
+
+    public function setCidade($cidade)
+    {
+        $this->cidade = $cidade;
+    }
+
+    public function setRua($rua)
+    {
+        $this->rua = $rua;
+    }
+
+    public function setCep($cep)
+    {
+        $this->cep = $cep;
+    }
+
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+    }
 
     public function setNome($nome)
     {
@@ -28,7 +83,7 @@ class PagueVeloz_Api_Model_Dto_AssinarDTO
         $this->_tipoPessoa = $tipoPessoa;
     }
 
-    public function setEmail(PagueVeloz_Api_Model_Dto_EmailDTO $email)
+    public function setEmail($email)
     {
         $this->_email = $email;
     }

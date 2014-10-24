@@ -17,14 +17,14 @@ class PagueVeloz_Boleto_Adminhtml_ContaController extends Mage_Adminhtml_Control
             if ($codigo_barras && $valor && $vencimento) {
                 try {
                     $webservice = Mage::getModel('pagueveloz_api/webservice');
-                    $contaDTO = Mage::getModel('pagueveloz_api/dto_contaDTO');
 
                     $result = $webservice->cadastrarConta($codigo_barras, $nome_titulo, $titulo, $valor, $vencimento);
-                    if ($result) {
-                        $response['success'] = true;
-                        $response['result'] = $result;
+                    if (is_array($result)) {
+                        $response['error'] =  $result;
+                    } else if ($result) {
+                      $response['msg'] = $result;
                     } else {
-                        $response['msg'] = 'Agendamento não efetuado';
+                        $response['success'] = true;
                     }
                 } catch (Exception $e) {
                     $response['msg'] = $e->getMessage();
@@ -37,4 +37,4 @@ class PagueVeloz_Boleto_Adminhtml_ContaController extends Mage_Adminhtml_Control
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
         }
     }
-} 
+}

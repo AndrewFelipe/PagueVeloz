@@ -28,6 +28,17 @@
             </admin_system_config_changed_section_pagueveloz>
         </events>
     </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <PagueVeloz_Api before="Mage_Adminhtml">PagueVeloz_Api_Adminhtml</PagueVeloz_Api>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
     <adminhtml>
         <layout>
             <updates>

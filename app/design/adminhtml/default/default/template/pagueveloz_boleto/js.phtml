@@ -15,7 +15,15 @@
                     if (dados.success) {
                         alert(dados.result.Message);
                     } else {
-                        alert(dados.msg);
+                        if (dados.error) {
+                            for(var prop in dados.error) {
+                                if(dados.error.hasOwnProperty(prop))
+                                    alert(dados.error[prop]);
+                            }
+                        }
+                        else {
+                            alert(dados.msg);
+                        }
                     }
                 },
                 onFailure: function() {

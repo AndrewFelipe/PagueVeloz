@@ -5,9 +5,9 @@ class PagueVeloz_Api_Model_Webservice_Assinar extends PagueVeloz_Api_Model_Webse
 
     private $_default_header = 'Content-Type: application/json';
 
-    public function __construct(PagueVeloz_Api_Model_Interfaces_IHttpClient $machine = null)
+    public function __construct()
     {
-        parent::__construct('api/v1/Assinar', $machine);
+        parent::__construct('api/v2/Assinar');
     }
 
     public function Post(PagueVeloz_Api_Model_Dto_AssinarDTO $dto)
@@ -17,14 +17,25 @@ class PagueVeloz_Api_Model_Webservice_Assinar extends PagueVeloz_Api_Model_Webse
         $contexto->addHeader($this->_default_header);
         $contexto->setHost($this->getHost());
 
-        $json = '{
-                    "Nome": "%s",
-                    "Documento": "%s",
-                    "TipoPessoa": "%s",
-                    "Email": "%s",
-                    "LoginUsuarioDefault": "%s"
-             }';
-        $json = sprintf($json, $dto->getNome(), $dto->getDocumento(), $dto->getTipoPessoa(), $dto->getEmail()->getEmail(), $dto->getLoginUsuarioDefault()->getEmail());
+        $json = array(
+            "Endereco" => array(
+                "Cidade" => array(
+                    "Nome" => $dto->getCidade(),
+                    "Estado" => $dto->getEstado()
+                ),
+                "Logradouro" => $dto->getRua(),
+                "Numero" => $dto->getNumero(),
+                "CEP" => $dto->getCep()
+            ),
+            "Nome" => $dto->getNome(),
+            "Documento" => $dto->getDocumento(),
+            "TipoPessoa" => $dto->getTipoPessoa(),
+            "Email" => $dto->getEmail(),
+            "LoginUsuarioDefault" => $dto->getLoginUsuarioDefault(),
+            //"UrlNotificacao" => '',
+            //"Id" => 6
+        );
+        $json = json_encode($json);
 
         $contexto->setBody($json);
 

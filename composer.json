@@ -1,0 +1,26 @@
+{
+    "name": "mageup/PagueVeloz",
+    "description": "Pagueveloz Payment to boleto brazilians especific payment",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "email": "contato@trezo.com.br",
+            "name": "Trezo"
+        }
+    ],
+    "keywords": [
+        "trezo",
+        "mageup",
+        "internal payment method boleto",
+        "magento 1",
+        "magento 1 module",
+        "magento 1 payment module",
+        "magento1-module",
+	"magento"
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "~5.5.0|~5.6.0|~7.0.0",
+        "magento/framework": "*"
+    }
+}
